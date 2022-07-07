@@ -32,7 +32,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-full flex items-center justify-center py-24 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-full flex items-center justify-center py-24 px-4 sm:px-6 lg:px-8 ">
       <div className="max-w-md w-full space-y-8">
         <div>
           <div className="w-full flex flex-col items-center justify-center">
@@ -67,7 +67,7 @@ export default function Home() {
                 id="email"
                 type="email"
                 className="appearance-none bg-zinc-800 rounded-none relative block w-full px-3 py-2 border-none placeholder-gray-500 text-gray-400 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="type it - test@test.com"
+                placeholder="johndoe@exemple.com"
                 {...register("email")}
                 onChange={e => setEmail(e.target.value)}
               />
@@ -78,7 +78,7 @@ export default function Home() {
                 id="password"
                 type="password"
                 className="appearance-none bg-zinc-800 rounded-none relative block w-full px-3 py-2 border-none placeholder-gray-500 text-gray-400 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="type it - 123456"
+                placeholder="Password"
                 {...register("password")}
                 onChange={e => setPassword(e.target.value)}
               />

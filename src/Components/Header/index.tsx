@@ -1,5 +1,7 @@
 import { useAuth } from "../../context/AuthContext";
 import { FaSignOutAlt } from "react-icons/fa"
+import { CanSee } from "../CanSee";
+import Link from "next/link";
 
 export function Header() {
   const { signOut } = useAuth()
@@ -18,20 +20,25 @@ export function Header() {
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <a
-                  href="#"
-                  className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                  aria-current="page"
-                >
-                  Dashboard
-                </a>
+                <Link href="/dashboard" >
+                  <a
+                    
+                    className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                    aria-current="page"
+                  >
+                    Dashboard
+                  </a>
+                </Link>
 
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Team
-                </a>
+                <CanSee permissions={["metrics.list"]} >
+                  <Link href="/metrics" >
+                    <a
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      Metrics
+                    </a>
+                  </Link>
+                </CanSee>
 
                 <a
                   href="#"
