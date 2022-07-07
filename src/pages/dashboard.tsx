@@ -1,20 +1,11 @@
-import { useEffect } from "react";
+import { CanSee } from "../Components/CanSee";
 import { Header } from "../Components/Header";
 import { useAuth } from "../context/AuthContext";
-import { api } from "../services/apiClient";
 import { setupAPIClient } from "../services/axios";
 import { withSSRAuth } from "../utils/withSSRAuth";
 
 export default function Dashboard() {
-  const { user, signOut } = useAuth()
-
-  useEffect(() => {
-    api.get("/me").then(response => {
-      console.log(response.data)
-    }).catch(() => {
-      signOut()
-    })
-  }, [])
+  const { user } = useAuth()
 
   return (
     <div className="min-h-full">
@@ -25,9 +16,13 @@ export default function Dashboard() {
             <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
           </div>
         </header>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 text-zinc-200 ">
           <div className="px-4 py-6 sm:px-0">
-            <h1 className="text-zinc-200 text-lg" >User email: {user?.email}</h1>
+            <h1 className="text-lg" >User email: {user?.email}</h1>
+
+            <CanSee permissions={['metrics.list']} >
+              <span>Metrics</span>
+            </CanSee>
           </div>
         </div>
       </main>

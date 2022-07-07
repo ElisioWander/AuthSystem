@@ -27,20 +27,20 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
+export function signOut() {
+  destroyCookie(undefined, 'auth-jwt.token')
+  destroyCookie(undefined, 'auth-jwt.refreshToken')
+  
+  //após destruir o token e refreshToken, redirecionar o usuário para a tela de login
+  Router.push('/')
+}
+
 export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>()
   //por padrão a variável "user" é false, se negar uma vez "!" ela vai para true, se negar outra vez "!!" false
   const isAuthenticated = !!user
-
-  function signOut() {
-    destroyCookie(undefined, 'auth-jwt.token')
-    destroyCookie(undefined, 'auth-jwt.refreshToken')
-    
-    //após destruir o token e refreshToken, redirecionar o usuário para a tela de login
-    Router.push('/')
-  }
 
   //recuperando estado da autenticação utilizando o token
   useEffect(() => {
@@ -97,7 +97,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         roles
       })
       
-
       //enviar o token no cabeçalho após o login
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 

@@ -1,8 +1,8 @@
 import { GetServerSidePropsContext } from "next";
-import { destroyCookie, parseCookies, setCookie } from "nookies";
+import { parseCookies, setCookie } from "nookies";
 import { AuthTokenError } from "./errors/AuthTokenError";
+import { signOut } from "../context/AuthContext";
 import axios, { AxiosError } from "axios";
-import Router from "next/router";
 
 type FaildRequestsQueue = {
   onSuccess: (token: string) => void;
@@ -104,10 +104,7 @@ export function setupAPIClient(ctx: Context = undefined) {
                 //seja causado pelo lado do cliente
                 if (typeof window === undefined) {
                   //desologar o usuário e redirecionar para a página de login
-                  destroyCookie(ctx, "auth-jwt.token");
-                  destroyCookie(ctx, "auth-jwt.refreshToken");
-
-                  Router.push("/");
+                  signOut()
                 } else {
                   //caso erro acontecer atravez de uma requisição feita através do backend
                   return Promise.reject(new AuthTokenError())
@@ -145,12 +142,7 @@ export function setupAPIClient(ctx: Context = undefined) {
           if (typeof window === undefined) {
             //se houver um erro do tipo "401" e não for por causa de token exirado, então vamos desologar
             //o usuário
-            destroyCookie(ctx, "auth-jwt.token");
-            destroyCookie(ctx, "auth-jwt.refreshToken");
-
-            Router.push("/");
-
-            console.log(error.response.status);
+            signOut()
           } else {
             //caso erro acontecer atravez de uma requisição feita através do backend
             return Promise.reject(new AuthTokenError())
