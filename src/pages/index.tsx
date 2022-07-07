@@ -1,6 +1,9 @@
+import { GetServerSideProps } from "next";
+import { parseCookies } from "nookies";
 import { useState } from "react";
 import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
+import { withSSRGest } from "../utils/withSSRGest";
 
 const resolver: Resolver<SignInData> = async (values) => {
   return {
@@ -100,3 +103,9 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps = withSSRGest(async (ctx) => {
+  return {
+    props: {}
+  }
+})

@@ -1,8 +1,7 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { api } from "../services/axios";
 import { setCookie, parseCookies, destroyCookie } from "nookies"
+import { api } from "../services/apiClient";
 import Router from "next/router"
-import { AxiosResponse } from "axios";
 
 //dados do usuário após login
 type User = {
@@ -107,6 +106,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       
     } catch (error) {
       console.log(error)
+
+      Router.push('/error')
     }
   }
 

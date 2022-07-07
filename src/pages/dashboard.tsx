@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { Header } from "../Components/Header";
 import { useAuth } from "../context/AuthContext";
-import { api } from "../services/axios";
+import { api } from "../services/apiClient";
+import { setupAPIClient } from "../services/axios";
+import { withSSRAuth } from "../utils/withSSRAuth";
 
 export default function Dashboard() {
   const { user, signOut } = useAuth()
@@ -25,12 +27,19 @@ export default function Dashboard() {
         </header>
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           <div className="px-4 py-6 sm:px-0">
-            <div className="border-4 border-dashed border-gray-200 rounded-lg h-96">
-              <h1>User {user?.email}</h1>
-            </div>
+            <h1 className="text-zinc-200 text-lg" >User email: {user?.email}</h1>
           </div>
         </div>
       </main>
     </div>
   );
 }
+
+export const getServerSideProps = withSSRAuth(async (ctx) => {
+  const api = setupAPIClient(ctx)
+  const response = await api.get('/me')
+
+  return {
+    props: {}
+  }
+})
