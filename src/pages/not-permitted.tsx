@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { GoAlert } from "react-icons/go"
-export default function() {
+export default function NotPermitted() {
   return (
     <div className="w-full h-screen flex flex-col gap-5 items-center justify-center text-zinc-200 text-lg" >
       <GoAlert fontSize={45} className="text-yellow-400" />
