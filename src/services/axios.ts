@@ -18,7 +18,7 @@ let failedRequestsQueue = Array<FaildRequestsQueue>();
 
 export function setupAPIClient(ctx: Context = undefined) {
   const api = axios.create({
-    baseURL: "http://localhost:3333/",
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
   });
 
   const { "auth-jwt.token": token } = parseCookies(ctx);
