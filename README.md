@@ -3,7 +3,7 @@
 </h1>
 
 ## 🏷️ Sobre 
-**auth-system** é um sistema de autenticação e autorização JWT desenvolvido com um backend já pronto.
+**auth-system** é um sistema de autenticação, autorização e refresh token JWT, desenvolvido com um backend já pronto.
 
 ---
 
